@@ -1,18 +1,18 @@
 #include <Arduino.h>
 #include<stdlib.h>
-#define LIMIT_X=0
-#define LIMIT_Y=0
+#define LIMIT_X 8
+#define LIMIT_Y 8
 
 
 int Delay = 10;
-uint8_t PORT[8] = {1,2,4,8,16,32,64,128};
+unit8_t PORT[8] = {1,2,4,8,16,32,64,128};
 
 
 
 
 char PORT[8]={128,64,32,16,8,4,2,1};
 char COLUMNA[8]={1,2,4,8,16,32,64,128};
-
+ 
 
 
 
@@ -68,8 +68,8 @@ void MostrarWin(){
             }		
 		} 
 	cont=cont+8;
+        }
     }
-}
 
 void MostrarGameOver(){
     int cont=0;
@@ -126,7 +126,7 @@ if (PINC&(1<<PC3)){
  }
 
 }
-
+}
 
 
 
@@ -164,8 +164,8 @@ persona.pos_x=0;
 persona.pos_y=0;
 
 typedef struct{
-  int *pos_x;
-  int *pos_y;
+  int pos_x;
+  int pos_y;
 }bombas;
 
 bombas  bomba[15];
@@ -179,8 +179,9 @@ for (int i=0;i<15;i++){
 
 while (1){
   movimiento(persona.pos_x,persona.pos_y);
-  PORTB=PORT[];
-
+  PORTB=PORT[*persona.pos_x];
+  PORTD=COLUMNA[*persona.pos_y];
+  _delay_ms(1);
 }
 
 
@@ -194,26 +195,4 @@ while (1){
 return 0;
 }
 
-void inline movimiento(int *pos_x,int *pos_y){
 
-//se mueve hacia arriba
-if (PINC&(1<<PC0)){
-pos_y+=1;
-
-}
-//se mueve hacia abajo
-if (PINC&(1<<PC1)){
-pos_y-=1;
-
-}
-//se mueve hacia la derecha 
-if (PINC&(1<<PC2)){
-pos_x+=1;
-
-}
-//se mueve hacia la izquierda
-if (PINC&(1<<PC3)){
-pos_x+=1;
-
-}
-}
