@@ -7,7 +7,7 @@
 
 
 
-uint8_t char win[] = {
+uint8_t win[] = {
     0x0,	0x0,	0x0,	0x0,	0x0,	0x0,	0x0,	0x0,
     0x0,	0x0,	0x0,	0x0,	0x80,	0x0,	0x0,	0x0,
     0x0,	0x0,	0x0,	0x0,	0x40,	0x0,	0x0,	0x0,
@@ -41,43 +41,72 @@ uint8_t char win[] = {
 uint8_t gameOver[] = {
     0x81,	0xFF,	0x42,	0x18,	0x18,	0x42,	0xFF,	0x81,   //X
     0x7E,	0x3C,	0x99,	0xE7,	0xE7,	0x99,	0x3C,	0x7E    //X negative
-}
+};
 
 uint8_t clearMatriz[] = {
     0x0,	0x0,	0x0,	0x0,	0x0,	0x0,	0x0,	0x0     //Espacio en Blanco
+};
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+void inline movimiento(int *pos_x,int *pos_y){
+
+//se mueve hacia arriba
+if (PINC&(1<<PC0)){
+ if(*pos_y<8){
+   pos_y+=1;
+ }
+
+
 }
+//se mueve hacia abajo
+if (PINC&(1<<PC1)){
+ if(*pos_y<8){
+   pos_y-=1;
+ }
+}
+//se mueve hacia la derecha 
+if (PINC&(1<<PC2)){
+   if(*pos_x<8){
+    pos_x+=1;
+ }
 
 
+}
+//se mueve hacia la izquierda
+if (PINC&(1<<PC3)){
+   if(*pos_x<8){
+   pos_x-=1;
+ }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+}
+}
 
 
 int main(){
  DDRB=0xff;
  DDRD=0xff;
+
 
 typedef struct{
   int *pos_x;
@@ -115,35 +144,4 @@ for (int i=0;i<15;i++){
 return 0;
 }
 
-void inline movimiento(int *pos_x,int *pos_y){
 
-//se mueve hacia arriba
-if (PINC&(1<<PC0)){
- if(*pos_y<8){
-   pos_y+=1;
- }
-
-
-}
-//se mueve hacia abajo
-if (PINC&(1<<PC1)){
- if(*pos_y<8){
-   pos_y-=1;
- }
-}
-//se mueve hacia la derecha 
-if (PINC&(1<<PC2)){
-   if(*pos_x<8){
-    pos_x+=1;
- }
-
-
-}
-//se mueve hacia la izquierda
-if (PINC&(1<<PC3)){
-   if(*pos_x<8){
-   pos_x-=1;
- }
-
-}
-}
