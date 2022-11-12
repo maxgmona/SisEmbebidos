@@ -179,7 +179,9 @@ for (int i=0;i<15;i++){
 
 while (1){
   movimiento(persona.pos_x,persona.pos_y);
-  PORTB=PORT[];
+  PORTB=PORT[*persona.pos_x];
+  PORTD=COLUMNA[*persona.pos_y];
+  _delay_ms(1);
 }
 
 
