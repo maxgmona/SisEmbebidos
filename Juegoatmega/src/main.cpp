@@ -4,8 +4,8 @@
 #define LIMIT_Y=0
 
 
-
-
+char PORT[8]={1,2,4,8,16,32,64,128};
+char fila[8]={128,64,32,16,8,4,2,1};
 
 uint8_t win[] = {
     0x0,	0x0,	0x0,	0x0,	0x0,	0x0,	0x0,	0x0,
@@ -102,6 +102,7 @@ if (PINC&(1<<PC3)){
 }
 }
 
+void inline movimiento(int *pos_x,int *pos_y);
 
 int main(){
  DDRB=0xff;
@@ -130,8 +131,12 @@ for (int i=0;i<15;i++){
 
 
 
+while (1){
+  movimiento(persona.pos_x,persona.pos_y);
+  PORTB=PORT[]
 
 
+}
 
 
 
