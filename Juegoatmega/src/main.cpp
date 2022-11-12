@@ -168,7 +168,6 @@ for (int i=0;i<15;i++){
 while (1){
   movimiento(persona.pos_x,persona.pos_y);
   PORTB=PORT[];
-
 }
 
 
