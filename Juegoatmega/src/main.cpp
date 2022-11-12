@@ -112,30 +112,29 @@ for (int i=0;i<15;i++){
 
 
 
-
 return 0;
 }
 
-void inline movimiento(){
+void inline movimiento(int *pos_x,int *pos_y){
 
 //se mueve hacia arriba
 if (PINC&(1<<PC0)){
-persona.pos_y+=1;
+pos_y+=1;
 
 }
 //se mueve hacia abajo
 if (PINC&(1<<PC1)){
-persona.pos_y-=1;
+pos_y-=1;
 
 }
 //se mueve hacia la derecha 
 if (PINC&(1<<PC2)){
-persona.pos_x+=1;
+pos_x+=1;
 
 }
 //se mueve hacia la izquierda
 if (PINC&(1<<PC3)){
-persona.pos_x+=1;
+pos_x+=1;
 
 }
 }
