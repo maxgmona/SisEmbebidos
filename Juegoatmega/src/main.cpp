@@ -4,16 +4,20 @@
 #define LIMIT_Y=0
 
 
+int Delay = 10;
+unit8_t PORT[8] = {1,2,4,8,16,32,64,128};
 
 
 
 
 char PORT[8]={128,64,32,16,8,4,2,1};
 char COLUMNA[8]={1,2,4,8,16,32,64,128};
- 
 
 
-uint8_t win[] = {
+
+
+
+char win[] = {
     0x0,	0x0,	0x0,	0x0,	0x0,	0x0,	0x0,	0x0,
     0x0,	0x0,	0x0,	0x0,	0x80,	0x0,	0x0,	0x0,
     0x0,	0x0,	0x0,	0x0,	0x40,	0x0,	0x0,	0x0,
@@ -44,34 +48,42 @@ uint8_t win[] = {
     0x10,	0x36,	0x46,	0x40,	0x40,	0x46,	0x36,	0x10    //Carita Feliz
 };
 
-uint8_t gameOver[] = {
+char gameOver[] = {
     0x81,	0xFF,	0x42,	0x18,	0x18,	0x42,	0xFF,	0x81,   //X
     0x7E,	0x3C,	0x99,	0xE7,	0xE7,	0x99,	0x3C,	0x7E    //X negative
 };
 
-uint8_t clearMatriz[] = {
+char clearMatriz[] = {
     0x0,	0x0,	0x0,	0x0,	0x0,	0x0,	0x0,	0x0     //Espacio en Blanco
 };
 
 void MostrarWin(){
-    while(1){
-        for(int i=0; i<8; i++){
-            PORTD = PORT[i];
-            PORTB = ~(win[i]);
-            _delay_ms(Delay)
-        }
+    int cont=0;
+	for (int i=0;i<2;i++){ 
+		for (int k=0;k<20;k++){ 
+			for (int j=0; j<8;j++){ 
+				PORTD = PORT[j]; 
+				PORTB = ~(win[j+cont]);  
+				_delay_ms(1);
+            }		
+		} 
+	cont=cont+8;
     }
+}
 
-
-
-
-
-
-
-
-
-
-
+void MostrarGameOver(){
+    int cont=0;
+	for (int i=0;i<2;i++){ 
+		for (int k=0;k<20;k++){ 
+			for (int j=0; j<8;j++){ 
+				PORTD = PORT[j]; 
+				PORTB = ~(gameOver[j+cont]);  
+				_delay_ms(1);
+            }		
+		} 
+	cont=cont+8;
+    }
+}
 
 
 
@@ -182,4 +194,26 @@ while (1){
 return 0;
 }
 
+void inline movimiento(int *pos_x,int *pos_y){
 
+//se mueve hacia arriba
+if (PINC&(1<<PC0)){
+pos_y+=1;
+
+}
+//se mueve hacia abajo
+if (PINC&(1<<PC1)){
+pos_y-=1;
+
+}
+//se mueve hacia la derecha 
+if (PINC&(1<<PC2)){
+pos_x+=1;
+
+}
+//se mueve hacia la izquierda
+if (PINC&(1<<PC3)){
+pos_x+=1;
+
+}
+}
