@@ -86,7 +86,7 @@ void MostrarGameOver()
 
 void inline movimiento(int *pos_x, int *pos_y)
 {
-
+    
   // se mueve hacia arriba
   if (!(PINC & (1 << PC0)))
   {
