@@ -1,11 +1,10 @@
 #include <Arduino.h>
-#include<stdlib.h>
+#include <stdlib.h>
 #define LIMIT_X 8
 #define LIMIT_Y 8
 
-
 int Delay = 10;
-unit8_t PORT[8] = {1,2,4,8,16,32,64,128};
+
 
 
 
@@ -48,151 +47,141 @@ char win[] = {
     0x10,	0x36,	0x46,	0x40,	0x40,	0x46,	0x36,	0x10    //Carita Feliz
 };
 
-char gameOver[] = {
-    0x81,	0xFF,	0x42,	0x18,	0x18,	0x42,	0xFF,	0x81,   //X
-    0x7E,	0x3C,	0x99,	0xE7,	0xE7,	0x99,	0x3C,	0x7E    //X negative
+uint8_t gameOver[] = {
+    0x81, 0xFF, 0x42, 0x18, 0x18, 0x42, 0xFF, 0x81, // X
+    0x7E, 0x3C, 0x99, 0xE7, 0xE7, 0x99, 0x3C, 0x7E  // X negative
 };
 
-char clearMatriz[] = {
-    0x0,	0x0,	0x0,	0x0,	0x0,	0x0,	0x0,	0x0     //Espacio en Blanco
+uint8_t clearMatriz[] = {
+    0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0 // Espacio en Blanco
 };
 
-void MostrarWin(){
-    int cont=0;
-	for (int i=0;i<2;i++){ 
-		for (int k=0;k<20;k++){ 
-			for (int j=0; j<8;j++){ 
-				PORTD = PORT[j]; 
-				PORTB = ~(win[j+cont]);  
-				_delay_ms(1);
-            }		
-		} 
-	cont=cont+8;
-        }
+void MostrarWin()
+{
+  int cont = 0;
+  for (int i = 0; i < 2; i++)
+  {
+    for (int k = 0; k < 20; k++)
+    {
+      for (int j = 0; j < 8; j++)
+      {
+        PORTD = PORT[j];
+        PORTB = ~(win[j + cont]);
+        _delay_ms(1);
+      }
+    }
+    cont = cont + 8;
+  }
+}
+
+void MostrarGameOver()
+{
+  int cont = 0;
+  for (int i = 0; i < 2; i++)
+  {
+    for (int k = 0; k < 20; k++)
+    {
+      for (int j = 0; j < 8; j++)
+      {
+        PORTD = PORT[j];
+        PORTB = ~(gameOver[j + cont]);
+        _delay_ms(1);
+      }
+    }
+    cont = cont + 8;
+  }
+}
+
+void inline movimiento(int *pos_x, int *pos_y)
+{
+    
+  // se mueve hacia arriba
+  if (!(PINC & (1 << PC0)))
+  {
+    while (!(PINC & (1 << PC0)))
+    {
+      /* code */
     }
 
-void MostrarGameOver(){
-    int cont=0;
-	for (int i=0;i<2;i++){ 
-		for (int k=0;k<20;k++){ 
-			for (int j=0; j<8;j++){ 
-				PORTD = PORT[j]; 
-				PORTB = ~(gameOver[j+cont]);  
-				_delay_ms(1);
-            }		
-		} 
-	cont=cont+8;
+    if (*pos_y < 7)
+    {
+      *pos_y -= 1;
     }
+  }
+  // se mueve hacia abajo
+  if (!(PINC & (1 << PC1)))
+  {
+    while (!(PINC & (1 << PC1)))
+    {
+      /* code */
+    }
+    if (*pos_y < 7)
+    {
+      *pos_y += 1;
+    }
+  }
+  // se mueve hacia la derecha
+  if (!(PINC & (1 << PC2)))
+  {
+    while (!(PINC & (1 << PC2)))
+    {
+      /* code */
+    }
+    if (*pos_x < 7)
+    {
+      *pos_x += 1;
+    }
+  }
+  // se mueve hacia la izquierda
+  if (!(PINC & (1 << PC3)))
+  {
+    while (!(PINC & (1 << PC3)))
+    {
+      /* code */
+    }
+    if (*pos_x < 7)
+    {
+      *pos_x -= 1;
+    }
+  }
 }
 
 
 
+int main()
+{
+  DDRB = 0xff;
+  DDRD = 0xff;
 
+  typedef struct
+  {
+    int *pos_x;
+    int *pos_y;
+  } jugador;
+  jugador persona;
+  persona.pos_x = 0;
+  persona.pos_y = 0;
 
+  typedef struct
+  {
+    int pos_x;
+    int pos_y;
+  } bombas;
 
+  bombas bomba[15];
+  for (int i = 0; i < 15; i++)
+  {
+    bomba[i].pos_x = rand() % (LIMIT_X - 2) + 1;
+    bomba[i].pos_y = rand() % (LIMIT_Y - 2) + 1;
+  }
 
+  while (1)
+  {
+    movimiento(persona.pos_x, persona.pos_y);
+    PORTB = ~PORT[*persona.pos_y];
+    PORTD = COLUMNA[*persona.pos_x];
+    _delay_ms(1);
+  }
 
-
-
-
-void inline movimiento(int *pos_x,int *pos_y){
-
-//se mueve hacia arriba
-if (PINC&(1<<PC0)){
- if(*pos_y<8){
-   pos_y+=1;
- }
-
-
+  return 0;
 }
-//se mueve hacia abajo
-if (PINC&(1<<PC1)){
- if(*pos_y<8){
-   pos_y-=1;
- }
-}
-//se mueve hacia la derecha 
-if (PINC&(1<<PC2)){
-   if(*pos_x<8){
-    pos_x+=1;
- }
-
-
-}
-//se mueve hacia la izquierda
-if (PINC&(1<<PC3)){
-   if(*pos_x<8){
-   pos_x-=1;
- }
-
-}
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-void inline movimiento(int *pos_x,int *pos_y);
-
-int main(){
- DDRB=0xff;
- DDRD=0xff;
-
-
-typedef struct{
-  int *pos_x;
-  int *pos_y;
-}jugador;
-jugador persona ;
-persona.pos_x=0;
-persona.pos_y=0;
-
-typedef struct{
-  int pos_x;
-  int pos_y;
-}bombas;
-
-bombas  bomba[15];
-for (int i=0;i<15;i++){
-  bomba[i].pos_x=rand() % (LIMIT_X-2)+1;
-  bomba[i].pos_y=rand() % (LIMIT_Y-2)+1;
-}
-
-
-
-
-while (1){
-  movimiento(persona.pos_x,persona.pos_y);
-  PORTB=PORT[*persona.pos_x];
-  PORTD=COLUMNA[*persona.pos_y];
-  _delay_ms(1);
-}
-
-
-
-
-
-
-
-
-
-return 0;
-}
-
-
