@@ -5,14 +5,14 @@
 
 
 int Delay = 10;
-unit8_t PORT[8] = {1,2,4,8,16,32,64,128};
+
 
 
 
 
 char PORT[8]={128,64,32,16,8,4,2,1};
 char COLUMNA[8]={1,2,4,8,16,32,64,128};
-
+ 
 
 
 
@@ -68,8 +68,8 @@ void MostrarWin(){
             }		
 		} 
 	cont=cont+8;
+        }
     }
-}
 
 void MostrarGameOver(){
     int cont=0;
@@ -193,26 +193,4 @@ while (1){
 return 0;
 }
 
-void inline movimiento(int *pos_x,int *pos_y){
 
-//se mueve hacia arriba
-if (PINC&(1<<PC0)){
-pos_y+=1;
-
-}
-//se mueve hacia abajo
-if (PINC&(1<<PC1)){
-pos_y-=1;
-
-}
-//se mueve hacia la derecha 
-if (PINC&(1<<PC2)){
-pos_x+=1;
-
-}
-//se mueve hacia la izquierda
-if (PINC&(1<<PC3)){
-pos_x+=1;
-
-}
-}
