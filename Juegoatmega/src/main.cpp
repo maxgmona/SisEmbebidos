@@ -4,8 +4,14 @@
 #define LIMIT_Y=0
 
 
-char PORT[8]={1,2,4,8,16,32,64,128};
-char fila[8]={128,64,32,16,8,4,2,1};
+
+
+
+
+char PORT[8]={128,64,32,16,8,4,2,1};
+char COLUMNA[8]={1,2,4,8,16,32,64,128};
+ 
+
 
 uint8_t win[] = {
     0x0,	0x0,	0x0,	0x0,	0x0,	0x0,	0x0,	0x0,
@@ -47,6 +53,14 @@ uint8_t clearMatriz[] = {
     0x0,	0x0,	0x0,	0x0,	0x0,	0x0,	0x0,	0x0     //Espacio en Blanco
 };
 
+void MostrarWin(){
+    while(1){
+        for(int i=0; i<8; i++){
+            PORTD = PORT[i];
+            PORTB = ~(win[i]);
+            _delay_ms(Delay)
+        }
+    }
 
 
 
@@ -100,7 +114,27 @@ if (PINC&(1<<PC3)){
  }
 
 }
-}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 void inline movimiento(int *pos_x,int *pos_y);
 
@@ -133,8 +167,7 @@ for (int i=0;i<15;i++){
 
 while (1){
   movimiento(persona.pos_x,persona.pos_y);
-  PORTB=PORT[]
-
+  PORTB=PORT[];
 
 }
 
