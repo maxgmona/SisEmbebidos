@@ -80,9 +80,22 @@ for (int i=0;i<15;i++){
 
 void inline movimiento(){
 
+if (PINC&(1<<PC0)){
 
 
+}
+if (PINC&(1<<PC1)){
 
+
+}
+if (PINC&(1<<PC2)){
+
+
+}
+if (PINC&(1<<PC3)){
+
+
+}
 }
 return 0;
 }
