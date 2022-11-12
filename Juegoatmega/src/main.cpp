@@ -83,22 +83,31 @@ void inline movimiento(int *pos_x,int *pos_y){
 
 //se mueve hacia arriba
 if (PINC&(1<<PC0)){
-pos_y+=1;
+ if(*pos_y<8){
+   pos_y+=1;
+ }
+
 
 }
 //se mueve hacia abajo
 if (PINC&(1<<PC1)){
-pos_y-=1;
-
+ if(*pos_y<8){
+   pos_y-=1;
+ }
 }
 //se mueve hacia la derecha 
 if (PINC&(1<<PC2)){
-pos_x+=1;
+   if(*pos_x<8){
+    pos_x+=1;
+ }
+
 
 }
 //se mueve hacia la izquierda
 if (PINC&(1<<PC3)){
-pos_x+=1;
+   if(*pos_x<8){
+   pos_x-=1;
+ }
 
 }
 }
