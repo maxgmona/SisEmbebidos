@@ -23,9 +23,10 @@ typedef struct{
 
 bombas  bomba[15];
 for (int i=0;i<15;i++){
-  bomba[i].pos_x=rand() % (LIMIT_X-1);
-  bomba[i].pos_y=rand() % (LIMIT_Y-1);
+  bomba[i].pos_x=rand() % (LIMIT_X-2)+1;
+  bomba[i].pos_y=rand() % (LIMIT_Y-2)+1;
 }
+
 
 
 
