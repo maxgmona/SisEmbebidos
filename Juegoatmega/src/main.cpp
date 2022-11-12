@@ -1,4 +1,43 @@
 #include <Arduino.h>
+#include<stdlib.h>
+#define LIMIT_X=0
+#define LIMIT_Y=0
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 int main(){
  DDRB=0xff;
