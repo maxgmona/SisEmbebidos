@@ -7,6 +7,11 @@
 int Delay = 10;
 unit8_t PORT[8] = {1,2,4,8,16,32,64,128};
 
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> d9e9df383596974aa8c4f74a7e2f40ea2cf798c1
 uint8_t win[] = {
     0x0,	0x0,	0x0,	0x0,	0x0,	0x0,	0x0,	0x0,
     0x0,	0x0,	0x0,	0x0,	0x80,	0x0,	0x0,	0x0,
@@ -47,6 +52,7 @@ uint8_t clearMatriz[] = {
     0x0,	0x0,	0x0,	0x0,	0x0,	0x0,	0x0,	0x0     //Espacio en Blanco
 };
 
+<<<<<<< HEAD
 void MostrarWin(){
     while(1){
         for(int i=0; i<8; i++){
@@ -55,7 +61,61 @@ void MostrarWin(){
             _delay_ms(Delay)
         }
     }
+=======
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+void inline movimiento(int *pos_x,int *pos_y){
+
+//se mueve hacia arriba
+if (PINC&(1<<PC0)){
+ if(*pos_y<8){
+   pos_y+=1;
+ }
+
+
+>>>>>>> d9e9df383596974aa8c4f74a7e2f40ea2cf798c1
 }
+//se mueve hacia abajo
+if (PINC&(1<<PC1)){
+ if(*pos_y<8){
+   pos_y-=1;
+ }
+}
+//se mueve hacia la derecha 
+if (PINC&(1<<PC2)){
+   if(*pos_x<8){
+    pos_x+=1;
+ }
+
+
+}
+//se mueve hacia la izquierda
+if (PINC&(1<<PC3)){
+   if(*pos_x<8){
+   pos_x-=1;
+ }
+
+<<<<<<< HEAD
 
 
 
@@ -78,14 +138,16 @@ void MostrarWin(){
 
 
 
-
-
-
+=======
+}
+}
+>>>>>>> d9e9df383596974aa8c4f74a7e2f40ea2cf798c1
 
 
 int main(){
  DDRB=0xff;
  DDRD=0xff;
+
 
 typedef struct{
   int *pos_x;
@@ -123,26 +185,4 @@ for (int i=0;i<15;i++){
 return 0;
 }
 
-void inline movimiento(int *pos_x,int *pos_y){
 
-//se mueve hacia arriba
-if (PINC&(1<<PC0)){
-pos_y+=1;
-
-}
-//se mueve hacia abajo
-if (PINC&(1<<PC1)){
-pos_y-=1;
-
-}
-//se mueve hacia la derecha 
-if (PINC&(1<<PC2)){
-pos_x+=1;
-
-}
-//se mueve hacia la izquierda
-if (PINC&(1<<PC3)){
-pos_x+=1;
-
-}
-}
