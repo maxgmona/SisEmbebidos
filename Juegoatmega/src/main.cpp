@@ -4,14 +4,15 @@
 #define LIMIT_Y=0
 
 
-int Delay = 10;
-unit8_t PORT[8] = {1,2,4,8,16,32,64,128};
-
-<<<<<<< HEAD
-=======
 
 
->>>>>>> d9e9df383596974aa8c4f74a7e2f40ea2cf798c1
+
+
+char PORT[8]={128,64,32,16,8,4,2,1};
+char COLUMNA[8]={1,2,4,8,16,32,64,128};
+ 
+
+
 uint8_t win[] = {
     0x0,	0x0,	0x0,	0x0,	0x0,	0x0,	0x0,	0x0,
     0x0,	0x0,	0x0,	0x0,	0x80,	0x0,	0x0,	0x0,
@@ -52,16 +53,14 @@ uint8_t clearMatriz[] = {
     0x0,	0x0,	0x0,	0x0,	0x0,	0x0,	0x0,	0x0     //Espacio en Blanco
 };
 
-<<<<<<< HEAD
 void MostrarWin(){
     while(1){
         for(int i=0; i<8; i++){
-            PORTD = PORT[i]
+            PORTD = PORT[i];
             PORTB = ~(win[i]);
             _delay_ms(Delay)
         }
     }
-=======
 
 
 
@@ -93,7 +92,6 @@ if (PINC&(1<<PC0)){
  }
 
 
->>>>>>> d9e9df383596974aa8c4f74a7e2f40ea2cf798c1
 }
 //se mueve hacia abajo
 if (PINC&(1<<PC1)){
@@ -115,34 +113,30 @@ if (PINC&(1<<PC3)){
    pos_x-=1;
  }
 
-<<<<<<< HEAD
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-=======
 }
-}
->>>>>>> d9e9df383596974aa8c4f74a7e2f40ea2cf798c1
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+void inline movimiento(int *pos_x,int *pos_y);
 
 int main(){
  DDRB=0xff;
@@ -171,8 +165,11 @@ for (int i=0;i<15;i++){
 
 
 
+while (1){
+  movimiento(persona.pos_x,persona.pos_y);
+  PORTB=PORT[];
 
-
+}
 
 
 
