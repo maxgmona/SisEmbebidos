@@ -79,40 +79,17 @@ void MostrarWin()
       {
 				PORTD = PORT[j]; 
         PORTB = ~(win[j + cont]);
-<<<<<<< HEAD
-				_delay_ms(1);
-            }		
-		} 
-    cont = cont + 8;
-        }
-    }
-
-void MostrarGameOver()
-{
-  int cont = 0;
-  for (int i = 0; i < 2; i++)
-=======
         _delay_ms(0.2);
       }
     }
     cont = cont + 8;
   }
   for (int i = 0; i < 68; i++)
->>>>>>> 27173fc94d627a57234ba19505af7f76eae93d95
   {
     for (int k = 0; k < 12; k++)
     {
       for (int j = 0; j < 8; j++)
       {
-<<<<<<< HEAD
-				PORTD = PORT[j]; 
-        PORTB = ~(gameOver[j + cont]);
-				_delay_ms(1);
-            }		
-		} 
-    cont = cont + 8;
-    }
-=======
         PORTD = PORT[j];
         PORTB = ~(youWin[j + i]);
         _delay_ms(0.2);
@@ -139,101 +116,72 @@ void MostrarGameOver()
     cont = cont + 8;
     }
   }
->>>>>>> 27173fc94d627a57234ba19505af7f76eae93d95
 }
 
 void ClearMatriz(){
   PORTD = 0x0;
   PORTB = 0xff;
 };
-
+//definimos la estructura jugador
   typedef struct
   {
-    int *pos_x;
-    int *pos_y;
+    int pos_x;
+    int pos_y;
   } jugador;
 
-void movimiento(int *pos_x, int *pos_y)
+void movimiento(int *pos_x,int *pos_y)
 {
-<<<<<<< HEAD
-=======
   PORTC &= ~(0B1110000);
-  int actualX = *pos_x;  
-  int actualY = *pos_y;
->>>>>>> 27173fc94d627a57234ba19505af7f76eae93d95
-
+  int limitx=7;
   // se mueve hacia arriba
   if (!(PINC & (1 << PC0)))
   {
-<<<<<<< HEAD
-    while (!(PINC & (1 << PC0)))
-    {
-      /* code */
- }
-=======
     while (!(PINC & (1 << PC0))){}
->>>>>>> 27173fc94d627a57234ba19505af7f76eae93d95
-
+   
     PORTC |= 0B0010000;
-    if (*pos_y > 0)
-    {
-      *pos_y -= 1;
-<<<<<<< HEAD
-}
- }
-  // se mueve hacia abajo
-  if (!(PINC & (1 << PC1)))
-  {
-    while (!(PINC & (1 << PC1)))
-    {
-      /* code */
-}
-    if (*pos_y < 7)
+    if (pos_y < &limitx)
     {
       *pos_y += 1;
- }
-}
-=======
     }
   }
 
   // se mueve hacia abajo
-  if (!(PINC & (1 << PC1)))
+  else if (!(PINC & (1 << PC1)))
   {
     while (!(PINC & (1 << PC1))){}
 
     PORTC |= 0B0110000;
-    if (*pos_y < 7)
+    if ((int)pos_y > 0)
     {
-      *pos_y += 1;
+      *pos_y -= 1;
     }
   }
 
->>>>>>> 27173fc94d627a57234ba19505af7f76eae93d95
   // se mueve hacia la derecha
-  if (!(PINC & (1 << PC2)))
+  else if (!(PINC & (1 << PC2)))
   {
     while (!(PINC & (1 << PC2))){}
 
     PORTC |= 0B1010000;
-    if (*pos_x < 7)
+    if (pos_x < &limitx)
     {
-      *pos_x += 1;
+      *pos_x+= 1;
     }
   }
 
   // se mueve hacia la izquierda
-  if (!(PINC & (1 << PC3)))
+  else if (!(PINC & (1 << PC3)))
   {
     while (!(PINC & (1 << PC3))){}
 
     PORTC |= 0B1110000;
-    if (*pos_x > 0)
+    if ((int)pos_x > 0)
     {
-      *pos_x -= 1;
+      *pos_x-= 1;
  }
 }
 }
+
 
 
 
@@ -243,19 +191,11 @@ int main()
   DDRD = 0xff;
   DDRC = 0b1110000;
 
-<<<<<<< HEAD
-  typedef struct
-  {
-  int *pos_x;
-  int *pos_y;
-  } jugador;
-=======
   // typedef struct
   // {
   //   int *pos_x;
   //   int *pos_y;
   // } jugador;
->>>>>>> 27173fc94d627a57234ba19505af7f76eae93d95
   jugador persona;
   persona.pos_x = 0;
   persona.pos_y = 0;
@@ -275,9 +215,9 @@ int main()
 
   while (1)
   {
-    movimiento(persona.pos_x, persona.pos_y);
-    PORTB = ~PORT[*persona.pos_y];
-    PORTD = COLUMNA[*persona.pos_x];
+    movimiento(&persona.pos_x, &persona.pos_y);
+    PORTB = ~PORT[persona.pos_y];
+    PORTD = COLUMNA[persona.pos_x];
   _delay_ms(1);
 }
 
