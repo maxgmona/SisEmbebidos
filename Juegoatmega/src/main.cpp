@@ -84,9 +84,11 @@ void MostrarGameOver()
   }
 }
 
-void inline movimiento(int *pos_x, int *pos_y)
+void movimiento(int *pos_x, int *pos_y)
 {
-    
+  int actualX = *pos_x;  
+  int actualY = *pos_y;
+
   // se mueve hacia arriba
   if (!(PINC & (1 << PC0)))
   {
@@ -109,7 +111,8 @@ void inline movimiento(int *pos_x, int *pos_y)
     }
     if (*pos_y < 7)
     {
-      *pos_y += 1;
+      *pos_y = actualY + 1;
+      *pos_x = actualX;
     }
   }
   // se mueve hacia la derecha
