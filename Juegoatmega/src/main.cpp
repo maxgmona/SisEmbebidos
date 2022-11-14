@@ -9,14 +9,14 @@ int Delay = 10;
 
 
 
-char PORT[8]={128,64,32,16,8,4,2,1};
-char COLUMNA[8]={1,2,4,8,16,32,64,128};
+uint8_t PORT[8]={128,64,32,16,8,4,2,1};
+uint8_t COLUMNA[8]={1,2,4,8,16,32,64,128};
  
 
 
 
 
-char win[] = {
+uint8_t win[] = {
     0x0,	0x0,	0x0,	0x0,	0x0,	0x0,	0x0,	0x0,
     0x0,	0x0,	0x0,	0x0,	0x80,	0x0,	0x0,	0x0,
     0x0,	0x0,	0x0,	0x0,	0x40,	0x0,	0x0,	0x0,
@@ -25,7 +25,7 @@ char win[] = {
     0x0,	0x0,	0x0,	0x18,	0x18,	0x0,	0x0,	0x0,
     0x0,	0x0,	0x18,	0x24,	0x24,	0x18,	0x0,	0x0,
     0x0,	0x18,	0x24,	0x5A,	0x5A,	0x24,	0x18,	0x0,
-    0x18,	0x24,	0x5A,	0xA5,   0xA5,	0x5A,	0x24,	0x18,
+    0x18,	0x24,	0x5A,	0xA5, 0xA5,	0x5A,	0x24,	0x18,
     0x3C,	0x42,	0x81,	0x99,	0x99,	0x81,	0x42,	0x3C,
     0x7E,	0x81,	0xA5,	0x99,	0x99,	0xA5,	0x81,	0x7E,
     0x5A,	0xC3,	0x24,	0x81,	0x81,	0x24,	0xC3,	0x5A,
@@ -43,12 +43,24 @@ char win[] = {
     0x55,	0xAA,	0x55,	0xAA,	0x55,	0xAA,	0x55,	0xAA,  //ajedrez 10
     0xA5,	0x42,	0xA5,	0x0,	0x0,	0xA5,	0x42,	0xA5,
     0xA5,	0x0,	0x81,	0x0,	0x0,	0x81,	0x0,	0xA5,
-    0x0,	0x0,	0x0,	0x0,	0x0,	0x0,	0x0,	0x0,
-    0x10,	0x36,	0x46,	0x40,	0x40,	0x46,	0x36,	0x10    //Carita Feliz
+    0x0,	0x0,	0x0,	0x0,	0x0,	0x0,	0x0,	0x0,  //Blanco
+    0x10,	0x36,	0x46,	0x40,	0x40,	0x46,	0x36,	0x10  //Carita Feliz
+};
+
+uint8_t youWin[] = {
+    0x0,	0x0,	0x0,	0x0,	0x0,	0x0,	0x0,	0x0,  //Blanco
+    0x03,	0x07,	0xFC,	0xF8,	0xFC,	0x07,	0x03,	0x00, //Y
+    0x7E,	0xFF,	0xC3,	0xC3,	0xC3,	0xFF,	0x7E,	0x00, //O
+    0x7F,	0xFF,	0xC0,	0xC0,	0xC0,	0xFF,	0x7F,       //U
+    0x00,	0x18,	0x18,	0x18,	0x18,	0x00, //-
+    0xFF,	0xFE,	0x60,	0x30,	0x60,	0xFE,	0xFF,	0x00, //W
+    0x81,	0x81,	0xFF,	0xFF,	0x81,	0x81,	0x00,       //I
+    0xFF,	0xFF,	0x0E,	0x38,	0x70,	0xFF,	0xFF,	0x00, //N
+    0x0,	0x0,	0x0,	0x0,	0x0,	0x0,	0x0,	0x0  //Blanco
 };
 
 uint8_t gameOver[] = {
-    0x81, 0xFF, 0x42, 0x18, 0x18, 0x42, 0xFF, 0x81, // X
+    0x81, 0xC3, 0x66, 0x18, 0x18, 0x66, 0xC3, 0x81, // X
     0x7E, 0x3C, 0x99, 0xE7, 0xE7, 0x99, 0x3C, 0x7E  // X negative
 };
 
@@ -59,90 +71,113 @@ uint8_t clearMatriz[] = {
 void MostrarWin()
 {
   int cont = 0;
-  for (int i = 0; i < 2; i++)
+  for (int i = 0; i < 28; i++)
   {
-    for (int k = 0; k < 20; k++)
+    for (int k = 0; k < 10; k++)
     {
       for (int j = 0; j < 8; j++)
       {
         PORTD = PORT[j];
         PORTB = ~(win[j + cont]);
-        _delay_ms(1);
+        _delay_ms(0.2);
       }
     }
     cont = cont + 8;
+  }
+  for (int i = 0; i < 68; i++)
+  {
+    for (int k = 0; k < 12; k++)
+    {
+      for (int j = 0; j < 8; j++)
+      {
+        PORTD = PORT[j];
+        PORTB = ~(youWin[j + i]);
+        _delay_ms(0.2);
+      }
+    }
   }
 }
 
 void MostrarGameOver()
 {
-  int cont = 0;
-  for (int i = 0; i < 2; i++)
-  {
-    for (int k = 0; k < 20; k++)
+  for(int n=0; n<3; n++){
+    int cont = 0;
+    for (int i = 0; i < 2; i++)
     {
-      for (int j = 0; j < 8; j++)
+      for (int k = 0; k < 10; k++)
       {
-        PORTD = PORT[j];
-        PORTB = ~(gameOver[j + cont]);
-        _delay_ms(1);
+        for (int j = 0; j < 8; j++)
+        {
+          PORTD = PORT[j];
+          PORTB = ~(gameOver[j + cont]);
+          _delay_ms(0.4);
+        }
       }
-    }
     cont = cont + 8;
+    }
   }
 }
 
+void ClearMatriz(){
+  PORTD = 0x0;
+  PORTB = 0xff;
+};
+
+  typedef struct
+  {
+    int *pos_x;
+    int *pos_y;
+  } jugador;
+
 void movimiento(int *pos_x, int *pos_y)
 {
+  PORTC &= ~(0B1110000);
   int actualX = *pos_x;  
   int actualY = *pos_y;
 
   // se mueve hacia arriba
   if (!(PINC & (1 << PC0)))
   {
-    while (!(PINC & (1 << PC0)))
-    {
-      /* code */
-    }
+    while (!(PINC & (1 << PC0))){}
 
-    if (*pos_y < 7)
+    PORTC |= 0B0010000;
+    if (*pos_y > 0)
     {
       *pos_y -= 1;
     }
   }
+
   // se mueve hacia abajo
   if (!(PINC & (1 << PC1)))
   {
-    while (!(PINC & (1 << PC1)))
-    {
-      /* code */
-    }
+    while (!(PINC & (1 << PC1))){}
+
+    PORTC |= 0B0110000;
     if (*pos_y < 7)
     {
-      *pos_y = actualY + 1;
-      *pos_x = actualX;
+      *pos_y += 1;
     }
   }
+
   // se mueve hacia la derecha
   if (!(PINC & (1 << PC2)))
   {
-    while (!(PINC & (1 << PC2)))
-    {
-      /* code */
-    }
+    while (!(PINC & (1 << PC2))){}
+
+    PORTC |= 0B1010000;
     if (*pos_x < 7)
     {
       *pos_x += 1;
     }
   }
+
   // se mueve hacia la izquierda
   if (!(PINC & (1 << PC3)))
   {
-    while (!(PINC & (1 << PC3)))
-    {
-      /* code */
-    }
-    if (*pos_x < 7)
+    while (!(PINC & (1 << PC3))){}
+
+    PORTC |= 0B1110000;
+    if (*pos_x > 0)
     {
       *pos_x -= 1;
     }
@@ -155,12 +190,13 @@ int main()
 {
   DDRB = 0xff;
   DDRD = 0xff;
+  DDRC = 0b1110000;
 
-  typedef struct
-  {
-    int *pos_x;
-    int *pos_y;
-  } jugador;
+  // typedef struct
+  // {
+  //   int *pos_x;
+  //   int *pos_y;
+  // } jugador;
   jugador persona;
   persona.pos_x = 0;
   persona.pos_y = 0;

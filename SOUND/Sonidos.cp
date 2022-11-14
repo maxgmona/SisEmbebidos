@@ -1,5 +1,5 @@
-#line 1 "C:/Users/cepaq/OneDrive/Escritorio/SE Deberes/SOUND/Sonidos.c"
-#line 14 "C:/Users/cepaq/OneDrive/Escritorio/SE Deberes/SOUND/Sonidos.c"
+#line 1 "R:/Documentos/Sistemas_Embebidos/Tareas/Juego-Mina/SisEmbebidos/SOUND/Sonidos.c"
+#line 14 "R:/Documentos/Sistemas_Embebidos/Tareas/Juego-Mina/SisEmbebidos/SOUND/Sonidos.c"
 void move();
 void explote();
 void gameover();
