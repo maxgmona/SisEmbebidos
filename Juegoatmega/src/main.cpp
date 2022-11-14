@@ -181,7 +181,7 @@ int main()
   while (1)
   {
     movimiento(persona.pos_x, persona.pos_y);
-    PORTD = ~PORT[*persona.pos_y];
+    PORTB = ~PORT[*persona.pos_y];
     PORTD = COLUMNA[*persona.pos_x];
     _delay_ms(1);
   }
