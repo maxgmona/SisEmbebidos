@@ -57,14 +57,14 @@ void MostrarWin()
     {
       for (int j = 0; j < 8; j++)
       {
-        PORTD = PORT[j];
+				PORTD = PORT[j]; 
         PORTB = ~(win[j + cont]);
-        _delay_ms(1);
-      }
-    }
+				_delay_ms(1);
+            }		
+		} 
     cont = cont + 8;
-  }
-}
+        }
+    }
 
 void MostrarGameOver()
 {
@@ -75,43 +75,43 @@ void MostrarGameOver()
     {
       for (int j = 0; j < 8; j++)
       {
-        PORTD = PORT[j];
+				PORTD = PORT[j]; 
         PORTB = ~(gameOver[j + cont]);
-        _delay_ms(1);
-      }
-    }
+				_delay_ms(1);
+            }		
+		} 
     cont = cont + 8;
-  }
+    }
 }
 
 void inline movimiento(int *pos_x, int *pos_y)
 {
-    
+
   // se mueve hacia arriba
   if (!(PINC & (1 << PC0)))
   {
     while (!(PINC & (1 << PC0)))
     {
       /* code */
-    }
+ }
 
     if (*pos_y < 7)
     {
       *pos_y -= 1;
-    }
-  }
+}
+ }
   // se mueve hacia abajo
   if (!(PINC & (1 << PC1)))
   {
     while (!(PINC & (1 << PC1)))
     {
       /* code */
-    }
+}
     if (*pos_y < 7)
     {
       *pos_y += 1;
-    }
-  }
+ }
+}
   // se mueve hacia la derecha
   if (!(PINC & (1 << PC2)))
   {
@@ -134,8 +134,8 @@ void inline movimiento(int *pos_x, int *pos_y)
     if (*pos_x < 7)
     {
       *pos_x -= 1;
-    }
-  }
+ }
+}
 }
 
 
@@ -147,8 +147,8 @@ int main()
 
   typedef struct
   {
-    int *pos_x;
-    int *pos_y;
+  int *pos_x;
+  int *pos_y;
   } jugador;
   jugador persona;
   persona.pos_x = 0;
@@ -156,8 +156,8 @@ int main()
 
   typedef struct
   {
-    int pos_x;
-    int pos_y;
+  int pos_x;
+  int pos_y;
   } bombas;
 
   bombas bomba[15];
@@ -165,15 +165,15 @@ int main()
   {
     bomba[i].pos_x = rand() % (LIMIT_X - 2) + 1;
     bomba[i].pos_y = rand() % (LIMIT_Y - 2) + 1;
-  }
+}
 
   while (1)
   {
     movimiento(persona.pos_x, persona.pos_y);
     PORTB = ~PORT[*persona.pos_y];
     PORTD = COLUMNA[*persona.pos_x];
-    _delay_ms(1);
-  }
+  _delay_ms(1);
+}
 
-  return 0;
+return 0;
 }
