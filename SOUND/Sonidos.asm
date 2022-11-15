@@ -286,23 +286,15 @@ _move:
 ;Sonidos.c,73 :: 		int i = 0;
 	CLRF       move_i_L0+0
 	CLRF       move_i_L0+1
-	MOVLW      50
+	MOVLW      238
 	MOVWF      move_tonada_L0+0
-	MOVLW      0
+	MOVLW      1
 	MOVWF      move_tonada_L0+1
-	MOVLW      60
+	MOVLW      114
 	MOVWF      move_tonada_L0+2
-	MOVLW      0
+	MOVLW      1
 	MOVWF      move_tonada_L0+3
-	MOVLW      4
-	MOVWF      move_tonada_L0+4
-	MOVLW      0
-	MOVWF      move_tonada_L0+5
-	MOVLW      2
-	MOVWF      move_tonada_L0+6
-	MOVLW      0
-	MOVWF      move_tonada_L0+7
-;Sonidos.c,78 :: 		for (i=0; i< 4; i++){
+;Sonidos.c,78 :: 		for (i=0; i< 2; i++){
 	CLRF       move_i_L0+0
 	CLRF       move_i_L0+1
 L_move15:
@@ -313,7 +305,7 @@ L_move15:
 	SUBWF      R0+0, 0
 	BTFSS      STATUS+0, 2
 	GOTO       L__move65
-	MOVLW      4
+	MOVLW      2
 	SUBWF      move_i_L0+0, 0
 L__move65:
 	BTFSC      STATUS+0, 0
@@ -321,7 +313,7 @@ L__move65:
 ;Sonidos.c,79 :: 		int tiempo = 0;
 	CLRF       move_tiempo_L1+0
 	CLRF       move_tiempo_L1+1
-;Sonidos.c,80 :: 		if (i == 0 || i == 4){
+;Sonidos.c,80 :: 		if (i == 0 || i == 2){
 	MOVLW      0
 	XORWF      move_i_L0+1, 0
 	BTFSS      STATUS+0, 2
@@ -335,7 +327,7 @@ L__move66:
 	XORWF      move_i_L0+1, 0
 	BTFSS      STATUS+0, 2
 	GOTO       L__move67
-	MOVLW      4
+	MOVLW      2
 	XORWF      move_i_L0+0, 0
 L__move67:
 	BTFSC      STATUS+0, 2
@@ -388,7 +380,7 @@ L_move22:
 	GOTO       L_move22
 	DECFSZ     R12+0, 1
 	GOTO       L_move22
-;Sonidos.c,78 :: 		for (i=0; i< 4; i++){
+;Sonidos.c,78 :: 		for (i=0; i< 2; i++){
 	INCF       move_i_L0+0, 1
 	BTFSC      STATUS+0, 2
 	INCF       move_i_L0+1, 1
@@ -406,23 +398,15 @@ _explote:
 ;Sonidos.c,92 :: 		int i = 0;
 	CLRF       explote_i_L0+0
 	CLRF       explote_i_L0+1
-	MOVLW      6
+	MOVLW      220
 	MOVWF      explote_tonada_L0+0
-	MOVLW      1
+	MOVLW      0
 	MOVWF      explote_tonada_L0+1
-	MOVLW      6
+	MOVLW      246
 	MOVWF      explote_tonada_L0+2
-	MOVLW      1
+	MOVLW      0
 	MOVWF      explote_tonada_L0+3
-	MOVLW      38
-	MOVWF      explote_tonada_L0+4
-	MOVLW      1
-	MOVWF      explote_tonada_L0+5
-	MOVLW      6
-	MOVWF      explote_tonada_L0+6
-	MOVLW      1
-	MOVWF      explote_tonada_L0+7
-;Sonidos.c,97 :: 		for (i=0; i< 4; i++){
+;Sonidos.c,97 :: 		for (i=0; i< 2; i++){
 	CLRF       explote_i_L0+0
 	CLRF       explote_i_L0+1
 L_explote23:
@@ -433,7 +417,7 @@ L_explote23:
 	SUBWF      R0+0, 0
 	BTFSS      STATUS+0, 2
 	GOTO       L__explote69
-	MOVLW      4
+	MOVLW      2
 	SUBWF      explote_i_L0+0, 0
 L__explote69:
 	BTFSC      STATUS+0, 0
@@ -441,7 +425,7 @@ L__explote69:
 ;Sonidos.c,98 :: 		int tiempo = 0;
 	CLRF       explote_tiempo_L1+0
 	CLRF       explote_tiempo_L1+1
-;Sonidos.c,99 :: 		if (i == 0 || i == 9){
+;Sonidos.c,99 :: 		if (i == 0 || i == 2){
 	MOVLW      0
 	XORWF      explote_i_L0+1, 0
 	BTFSS      STATUS+0, 2
@@ -455,18 +439,16 @@ L__explote70:
 	XORWF      explote_i_L0+1, 0
 	BTFSS      STATUS+0, 2
 	GOTO       L__explote71
-	MOVLW      9
+	MOVLW      2
 	XORWF      explote_i_L0+0, 0
 L__explote71:
 	BTFSC      STATUS+0, 2
 	GOTO       L__explote41
 	GOTO       L_explote28
 L__explote41:
-;Sonidos.c,100 :: 		tiempo = 10;
-	MOVLW      10
-	MOVWF      explote_tiempo_L1+0
-	MOVLW      0
-	MOVWF      explote_tiempo_L1+1
+;Sonidos.c,100 :: 		tiempo = 0.1;
+	CLRF       explote_tiempo_L1+0
+	CLRF       explote_tiempo_L1+1
 ;Sonidos.c,101 :: 		}
 	GOTO       L_explote29
 L_explote28:
@@ -498,10 +480,10 @@ L_explote29:
 	MOVF       explote_tiempo_L1+1, 0
 	MOVWF      FARG_Sound_Play_duration_ms+1
 	CALL       _Sound_Play+0
-;Sonidos.c,106 :: 		Delay_ms(10);
-	MOVLW      26
+;Sonidos.c,106 :: 		Delay_ms(2);
+	MOVLW      6
 	MOVWF      R12+0
-	MOVLW      248
+	MOVLW      48
 	MOVWF      R13+0
 L_explote30:
 	DECFSZ     R13+0, 1
@@ -509,7 +491,7 @@ L_explote30:
 	DECFSZ     R12+0, 1
 	GOTO       L_explote30
 	NOP
-;Sonidos.c,97 :: 		for (i=0; i< 4; i++){
+;Sonidos.c,97 :: 		for (i=0; i< 2; i++){
 	INCF       explote_i_L0+0, 1
 	BTFSC      STATUS+0, 2
 	INCF       explote_i_L0+1, 1
