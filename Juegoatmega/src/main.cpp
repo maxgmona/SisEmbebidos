@@ -151,17 +151,17 @@ void ClearMatriz(){
 void movimiento(int *pos_x,int *pos_y)
 {
   PORTC &= ~(0B1110000);
-  int limitx=7;
-  int limity=0;
+  int limit_max=7;
+  int limit_min=0;
   // se mueve hacia arriba
   if (!(PINC & (1 << PC0)))
   {
     while (!(PINC & (1 << PC0))){}
    
     PORTC |= 0B0010000;
-    if (pos_y < &limitx)
+    if (pos_y > 0)
     {
-      *pos_y += 1;
+      *pos_y -= 1;
     }
   }
 
@@ -171,9 +171,9 @@ void movimiento(int *pos_x,int *pos_y)
     while (!(PINC & (1 << PC1))){}
 
     PORTC |= 0B0110000;
-    if (pos_y > 0)
+    if (pos_y < &limit_max)
     {
-      *pos_y -= 1;
+      *pos_y += 1;
     }
   }
 
@@ -181,9 +181,9 @@ void movimiento(int *pos_x,int *pos_y)
   else if (!(PINC & (1 << PC2)))
   {
     while (!(PINC & (1 << PC2))){}
-
+    MostrarWin();
     PORTC |= 0B1010000;
-    if (pos_x < &limitx)
+    if (pos_x < &limit_max)
     {
       *pos_x += 1;
     }
@@ -193,9 +193,9 @@ void movimiento(int *pos_x,int *pos_y)
   else if (!(PINC & (1 << PC3)))
   {
     while (!(PINC & (1 << PC3))){}
-
+    MostrarGameOver();
     PORTC |= 0B1110000;
-    if (pos_x >0)
+    if (pos_x > 0)
     {
       *pos_x -= 1;
  }
