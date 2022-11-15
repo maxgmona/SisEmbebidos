@@ -509,39 +509,39 @@ _win:
 ;Sonidos.c,111 :: 		int i = 0;
 	CLRF       win_i_L0+0
 	CLRF       win_i_L0+1
-	MOVLW      25
+	MOVLW      250
 	MOVWF      win_tonada_L0+0
 	MOVLW      0
 	MOVWF      win_tonada_L0+1
-	MOVLW      6
+	MOVLW      160
 	MOVWF      win_tonada_L0+2
 	MOVLW      0
 	MOVWF      win_tonada_L0+3
-	MOVLW      99
+	MOVLW      222
 	MOVWF      win_tonada_L0+4
-	MOVLW      0
+	MOVLW      3
 	MOVWF      win_tonada_L0+5
-	MOVLW      6
+	MOVLW      160
 	MOVWF      win_tonada_L0+6
 	MOVLW      0
 	MOVWF      win_tonada_L0+7
-	MOVLW      3
+	MOVLW      130
 	MOVWF      win_tonada_L0+8
 	MOVLW      0
 	MOVWF      win_tonada_L0+9
-	MOVLW      62
+	MOVLW      108
 	MOVWF      win_tonada_L0+10
-	MOVLW      0
+	MOVLW      2
 	MOVWF      win_tonada_L0+11
-	MOVLW      51
+	MOVLW      254
 	MOVWF      win_tonada_L0+12
-	MOVLW      0
+	MOVLW      1
 	MOVWF      win_tonada_L0+13
-	MOVLW      5
+	MOVLW      150
 	MOVWF      win_tonada_L0+14
 	MOVLW      0
 	MOVWF      win_tonada_L0+15
-	MOVLW      2
+	MOVLW      120
 	MOVWF      win_tonada_L0+16
 	MOVLW      0
 	MOVWF      win_tonada_L0+17
