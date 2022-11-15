@@ -73,11 +73,11 @@ void move() {
      int i = 0;
      int y = 0;
      int tonada [] = {
-        500,600,40,20
+        SI,FAS
      };
-     for (i=0; i< 4; i++){
+     for (i=0; i< 2; i++){
          int tiempo = 0;
-         if (i == 0 || i == 4){
+         if (i == 0 || i == 2){
              tiempo = 20;
          }
          else {
@@ -92,18 +92,18 @@ void explote() {
      int i = 0;
      int y = 0;
      int tonada [] = {
-        DO,DO,RE,DO
+        220,246
      };
-     for (i=0; i< 4; i++){
+     for (i=0; i< 2; i++){
          int tiempo = 0;
-         if (i == 0 || i == 4){
-             tiempo = 10;
+         if (i == 0 || i == 2){
+             tiempo = 0.1;
          }
          else {
               tiempo = TIME;
          }
          Sound_play(tonada[i],tiempo);
-         Delay_ms(10);
+         Delay_ms(2);
      }
 }
 
@@ -111,7 +111,7 @@ void win() {
      int i = 0;
      int y = 0;
      int tonada [] = {
-        250,60,990,60,30,620,510,50,20
+        250,160,990,160,130,620,510,150,120
      };
      for (i=0; i< 9; i++){
          int tiempo = 0;
