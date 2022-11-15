@@ -67,6 +67,18 @@ uint8_t gameOver[] = {
 uint8_t clearMatriz[] = {
     0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0 // Espacio en Blanco
 };
+//definimos la estructura jugador
+  typedef struct
+  {
+    int pos_x;
+    int pos_y;
+  } jugador;
+
+  typedef struct
+  {
+  int pos_x;
+  int pos_y;
+  } bombas;
 
 void MostrarWin()
 {
@@ -117,22 +129,30 @@ void MostrarGameOver()
     }
   }
 }
+//la funcion cuando pierde
+void pierde (bombas bomba[],int *pos_x,int *pos_y){
+  for(int  i=0;i<15;i++){
+    if ((pos_x==&bomba[i].pos_x)&&(pos_y==&bomba[i].pos_y)){
+      MostrarGameOver();
+    }
+  }
+}
+void Gana (int *pos_x,int *pos_y){
 
+    if (((int)pos_x==7)&&((int)pos_y==7)){
+      MostrarWin();
+    }
+}
 void ClearMatriz(){
   PORTD = 0x0;
   PORTB = 0xff;
 };
-//definimos la estructura jugador
-  typedef struct
-  {
-    int pos_x;
-    int pos_y;
-  } jugador;
 
 void movimiento(int *pos_x,int *pos_y)
 {
   PORTC &= ~(0B1110000);
   int limitx=7;
+  int limity=0;
   // se mueve hacia arriba
   if (!(PINC & (1 << PC0)))
   {
@@ -151,7 +171,7 @@ void movimiento(int *pos_x,int *pos_y)
     while (!(PINC & (1 << PC1))){}
 
     PORTC |= 0B0110000;
-    if ((int)pos_y > 0)
+    if (pos_y > 0)
     {
       *pos_y -= 1;
     }
@@ -175,7 +195,7 @@ void movimiento(int *pos_x,int *pos_y)
     while (!(PINC & (1 << PC3))){}
 
     PORTC |= 0B1110000;
-    if ((int)pos_x > 0)
+    if (pos_x >0)
     {
       *pos_x-= 1;
  }
@@ -200,13 +220,8 @@ int main()
   persona.pos_x = 0;
   persona.pos_y = 0;
 
-  typedef struct
-  {
-  int pos_x;
-  int pos_y;
-  } bombas;
 
-  bombas bomba[15];
+ bombas bomba[15];
   for (int i = 0; i < 15; i++)
   {
     bomba[i].pos_x = rand() % (LIMIT_X - 2) + 1;
@@ -218,6 +233,8 @@ int main()
     movimiento(&persona.pos_x, &persona.pos_y);
     PORTB = ~PORT[persona.pos_y];
     PORTD = COLUMNA[persona.pos_x];
+      pierde(bomba,&persona.pos_x, &persona.pos_y);
+    Gana(&persona.pos_x, &persona.pos_y);
   _delay_ms(1);
 }
 
