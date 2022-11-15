@@ -180,7 +180,7 @@ _gameover:
 	MOVWF      gameover_tonada_L0+14
 	MOVLW      0
 	MOVWF      gameover_tonada_L0+15
-;Sonidos.c,59 :: 		for (i=0; i< 9; i++){
+;Sonidos.c,59 :: 		for (i=0; i< 8; i++){
 	CLRF       gameover_i_L0+0
 	CLRF       gameover_i_L0+1
 L_gameover7:
@@ -191,7 +191,7 @@ L_gameover7:
 	SUBWF      R0+0, 0
 	BTFSS      STATUS+0, 2
 	GOTO       L__gameover61
-	MOVLW      9
+	MOVLW      8
 	SUBWF      gameover_i_L0+0, 0
 L__gameover61:
 	BTFSC      STATUS+0, 0
@@ -199,7 +199,7 @@ L__gameover61:
 ;Sonidos.c,60 :: 		int tiempo = 0;
 	CLRF       gameover_tiempo_L1+0
 	CLRF       gameover_tiempo_L1+1
-;Sonidos.c,61 :: 		if (i == 0 || i == 9){
+;Sonidos.c,61 :: 		if (i == 0 || i == 8){
 	MOVLW      0
 	XORWF      gameover_i_L0+1, 0
 	BTFSS      STATUS+0, 2
@@ -213,7 +213,7 @@ L__gameover62:
 	XORWF      gameover_i_L0+1, 0
 	BTFSS      STATUS+0, 2
 	GOTO       L__gameover63
-	MOVLW      9
+	MOVLW      8
 	XORWF      gameover_i_L0+0, 0
 L__gameover63:
 	BTFSC      STATUS+0, 2
@@ -268,7 +268,7 @@ L_gameover14:
 	GOTO       L_gameover14
 	NOP
 	NOP
-;Sonidos.c,59 :: 		for (i=0; i< 9; i++){
+;Sonidos.c,59 :: 		for (i=0; i< 8; i++){
 	INCF       gameover_i_L0+0, 1
 	BTFSC      STATUS+0, 2
 	INCF       gameover_i_L0+1, 1
@@ -286,19 +286,19 @@ _move:
 ;Sonidos.c,73 :: 		int i = 0;
 	CLRF       move_i_L0+0
 	CLRF       move_i_L0+1
-	MOVLW      50
+	MOVLW      244
 	MOVWF      move_tonada_L0+0
-	MOVLW      0
+	MOVLW      1
 	MOVWF      move_tonada_L0+1
-	MOVLW      60
+	MOVLW      88
 	MOVWF      move_tonada_L0+2
-	MOVLW      0
+	MOVLW      2
 	MOVWF      move_tonada_L0+3
-	MOVLW      4
+	MOVLW      40
 	MOVWF      move_tonada_L0+4
 	MOVLW      0
 	MOVWF      move_tonada_L0+5
-	MOVLW      2
+	MOVLW      20
 	MOVWF      move_tonada_L0+6
 	MOVLW      0
 	MOVWF      move_tonada_L0+7
@@ -441,7 +441,7 @@ L__explote69:
 ;Sonidos.c,98 :: 		int tiempo = 0;
 	CLRF       explote_tiempo_L1+0
 	CLRF       explote_tiempo_L1+1
-;Sonidos.c,99 :: 		if (i == 0 || i == 9){
+;Sonidos.c,99 :: 		if (i == 0 || i == 4){
 	MOVLW      0
 	XORWF      explote_i_L0+1, 0
 	BTFSS      STATUS+0, 2
@@ -455,7 +455,7 @@ L__explote70:
 	XORWF      explote_i_L0+1, 0
 	BTFSS      STATUS+0, 2
 	GOTO       L__explote71
-	MOVLW      9
+	MOVLW      4
 	XORWF      explote_i_L0+0, 0
 L__explote71:
 	BTFSC      STATUS+0, 2
@@ -527,43 +527,43 @@ _win:
 ;Sonidos.c,111 :: 		int i = 0;
 	CLRF       win_i_L0+0
 	CLRF       win_i_L0+1
-	MOVLW      25
+	MOVLW      250
 	MOVWF      win_tonada_L0+0
 	MOVLW      0
 	MOVWF      win_tonada_L0+1
-	MOVLW      6
+	MOVLW      60
 	MOVWF      win_tonada_L0+2
 	MOVLW      0
 	MOVWF      win_tonada_L0+3
-	MOVLW      99
+	MOVLW      222
 	MOVWF      win_tonada_L0+4
-	MOVLW      0
+	MOVLW      3
 	MOVWF      win_tonada_L0+5
-	MOVLW      6
+	MOVLW      60
 	MOVWF      win_tonada_L0+6
 	MOVLW      0
 	MOVWF      win_tonada_L0+7
-	MOVLW      3
+	MOVLW      30
 	MOVWF      win_tonada_L0+8
 	MOVLW      0
 	MOVWF      win_tonada_L0+9
-	MOVLW      62
+	MOVLW      108
 	MOVWF      win_tonada_L0+10
-	MOVLW      0
+	MOVLW      2
 	MOVWF      win_tonada_L0+11
-	MOVLW      51
+	MOVLW      254
 	MOVWF      win_tonada_L0+12
-	MOVLW      0
+	MOVLW      1
 	MOVWF      win_tonada_L0+13
-	MOVLW      5
+	MOVLW      50
 	MOVWF      win_tonada_L0+14
 	MOVLW      0
 	MOVWF      win_tonada_L0+15
-	MOVLW      2
+	MOVLW      20
 	MOVWF      win_tonada_L0+16
 	MOVLW      0
 	MOVWF      win_tonada_L0+17
-;Sonidos.c,116 :: 		for (i=0; i< 11; i++){
+;Sonidos.c,116 :: 		for (i=0; i< 9; i++){
 	CLRF       win_i_L0+0
 	CLRF       win_i_L0+1
 L_win31:
@@ -574,7 +574,7 @@ L_win31:
 	SUBWF      R0+0, 0
 	BTFSS      STATUS+0, 2
 	GOTO       L__win73
-	MOVLW      11
+	MOVLW      9
 	SUBWF      win_i_L0+0, 0
 L__win73:
 	BTFSC      STATUS+0, 0
@@ -654,7 +654,7 @@ L_win38:
 	DECFSZ     R11+0, 1
 	GOTO       L_win38
 	NOP
-;Sonidos.c,116 :: 		for (i=0; i< 11; i++){
+;Sonidos.c,116 :: 		for (i=0; i< 9; i++){
 	INCF       win_i_L0+0, 1
 	BTFSC      STATUS+0, 2
 	INCF       win_i_L0+1, 1

@@ -9,7 +9,7 @@ int Delay = 10;
 
 
 
-uint8_t PORT[8]={128,64,32,16,8,4,2,1};
+uint8_t PORT[8]={1,2,4,8,16,32,64,128};
 uint8_t COLUMNA[8]={1,2,4,8,16,32,64,128};
  
 
@@ -185,7 +185,7 @@ void movimiento(int *pos_x,int *pos_y)
     PORTC |= 0B1010000;
     if (pos_x < &limitx)
     {
-      *pos_x+= 1;
+      *pos_x += 1;
     }
   }
 
@@ -197,7 +197,7 @@ void movimiento(int *pos_x,int *pos_y)
     PORTC |= 0B1110000;
     if (pos_x >0)
     {
-      *pos_x-= 1;
+      *pos_x -= 1;
  }
 }
 }
@@ -231,12 +231,12 @@ int main()
   while (1)
   {
     movimiento(&persona.pos_x, &persona.pos_y);
-    PORTB = ~PORT[persona.pos_y];
-    PORTD = COLUMNA[persona.pos_x];
-      pierde(bomba,&persona.pos_x, &persona.pos_y);
+    PORTB = PORT[persona.pos_x];  //COLUMNAS!!
+    PORTD = ~COLUMNA[persona.pos_y];  //FILAS!!
+    pierde(bomba,&persona.pos_x, &persona.pos_y);
     Gana(&persona.pos_x, &persona.pos_y);
-  _delay_ms(1);
-}
+    _delay_ms(1);
+  }
 
 return 0;
 }

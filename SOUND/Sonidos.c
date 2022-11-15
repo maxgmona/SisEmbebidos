@@ -56,9 +56,9 @@ void gameover() {
      int tonada [] = {
         50,85,70,125,325,195,63,84
      };
-     for (i=0; i< 9; i++){
+     for (i=0; i< 8; i++){
          int tiempo = 0;
-         if (i == 0 || i == 9){
+         if (i == 0 || i == 8){
              tiempo = 20;
          }
          else {
@@ -73,7 +73,7 @@ void move() {
      int i = 0;
      int y = 0;
      int tonada [] = {
-        50,60,4,2
+        500,600,40,20
      };
      for (i=0; i< 4; i++){
          int tiempo = 0;
@@ -96,7 +96,7 @@ void explote() {
      };
      for (i=0; i< 4; i++){
          int tiempo = 0;
-         if (i == 0 || i == 9){
+         if (i == 0 || i == 4){
              tiempo = 10;
          }
          else {
@@ -111,9 +111,9 @@ void win() {
      int i = 0;
      int y = 0;
      int tonada [] = {
-        25,6,99,6,3,62,51,5,2
+        250,60,990,60,30,620,510,50,20
      };
-     for (i=0; i< 11; i++){
+     for (i=0; i< 9; i++){
          int tiempo = 0;
          if (i == 0 || i == 9){
              tiempo = 20;
