@@ -9,14 +9,14 @@ int Delay = 10;
 
 
 
-uint8_t PORT[8]={128,64,32,16,8,4,2,1};
+uint8_t PORT[8]={1,2,4,8,16,32,64,128};
 uint8_t COLUMNA[8]={1,2,4,8,16,32,64,128};
  
 
 
 
 
-uint8_t win[] = {
+uint8_t fire[] = {
     0x0,	0x0,	0x0,	0x0,	0x0,	0x0,	0x0,	0x0,
     0x0,	0x0,	0x0,	0x0,	0x80,	0x0,	0x0,	0x0,
     0x0,	0x0,	0x0,	0x0,	0x40,	0x0,	0x0,	0x0,
@@ -44,7 +44,7 @@ uint8_t win[] = {
     0xA5,	0x42,	0xA5,	0x0,	0x0,	0xA5,	0x42,	0xA5,
     0xA5,	0x0,	0x81,	0x0,	0x0,	0x81,	0x0,	0xA5,
     0x0,	0x0,	0x0,	0x0,	0x0,	0x0,	0x0,	0x0,  //Blanco
-    0x10,	0x36,	0x46,	0x40,	0x40,	0x46,	0x36,	0x10  //Carita Feliz
+    //0x10,	0x36,	0x46,	0x40,	0x40,	0x46,	0x36,	0x10  //Carita Feliz
 };
 
 uint8_t youWin[] = {
@@ -60,8 +60,22 @@ uint8_t youWin[] = {
 };
 
 uint8_t gameOver[] = {
+    0x0,	0x0,	0x0,	0x0,	0x0,	0x0,	0x0,	0x0,  //Blanco
     0x81, 0xC3, 0x66, 0x18, 0x18, 0x66, 0xC3, 0x81, // X
-    0x7E, 0x3C, 0x99, 0xE7, 0xE7, 0x99, 0x3C, 0x7E  // X negative
+    0x0,
+    0x0,	0x7E,	0x7E,	0x42,	0x52,	0x72,	0x72,	0x0,
+    0x0,	0x7E,	0x7E,	0x12,	0x12,	0x7E,	0x7E,	0x0,
+    0x0,	0x7E,	0x06,	0x0C,	0x0C,	0x06,	0x7E,	0x0,
+    0x0,	0x7E,	0x7E,	0x52,	0x52,	0x42,	0x42,	0x0,
+    0x0,	0x18,	0x18,	0x18,	0x18, 0x0,  0x0,
+    0x0,	0x3C,	0x66,	0x42,	0x42,	0x66,	0x3C,	0x0,
+    0x0,	0x1E,	0x38,	0x60,	0x60,	0x38,	0x1E,	0x0,
+    0x0,	0x7E,	0x7E,	0x52,	0x52,	0x42,	0x42,	0x0,
+    0x0,	0x7E,	0x7E,	0x1A,	0x3A,	0x6E,	0x4E,	0x0,
+    0x0,
+    0x81, 0xC3, 0x66, 0x18, 0x18, 0x66, 0xC3, 0x81, // X
+    0x0,	0x0,	0x0,	0x0,	0x0,	0x0,	0x0,	0x0  //Blanco
+    // 0x7E, 0x3C, 0x99, 0xE7, 0xE7, 0x99, 0x3C, 0x7E  // X negative
 };
 
 uint8_t clearMatriz[] = {
@@ -83,28 +97,28 @@ uint8_t clearMatriz[] = {
 void MostrarWin()
 {
   int cont = 0;
-  for (int i = 0; i < 28; i++)
+  for (int i = 0; i < 20; i++)
   {
     for (int k = 0; k < 10; k++)
     {
       for (int j = 0; j < 8; j++)
       {
-				PORTD = PORT[j]; 
-        PORTB = ~(win[j + cont]);
-        _delay_ms(0.2);
+				PORTB = PORT[j]; 
+        PORTD = ~(fire[j + cont]);
+        _delay_ms(0.1);
       }
     }
     cont = cont + 8;
   }
   for (int i = 0; i < 68; i++)
   {
-    for (int k = 0; k < 12; k++)
+    for (int k = 0; k < 10; k++)
     {
       for (int j = 0; j < 8; j++)
       {
-        PORTD = PORT[j];
-        PORTB = ~(youWin[j + i]);
-        _delay_ms(0.2);
+        PORTB = PORT[j];
+        PORTD = ~(youWin[j + i]);
+        _delay_ms(0.1);
       }
     }
   }
@@ -112,23 +126,20 @@ void MostrarWin()
 
 void MostrarGameOver()
 {
-  for(int n=0; n<3; n++){
-    int cont = 0;
-    for (int i = 0; i < 2; i++)
+    for (int i = 0; i < 96; i++)
     {
       for (int k = 0; k < 10; k++)
       {
         for (int j = 0; j < 8; j++)
         {
-          PORTD = PORT[j];
-          PORTB = ~(gameOver[j + cont]);
-          _delay_ms(0.4);
+          PORTB = PORT[j];
+          PORTD = ~gameOver[j + i];
+          _delay_ms(0.1);
         }
       }
-    cont = cont + 8;
     }
   }
-}
+
 //la funcion cuando pierde
 void pierde (bombas bomba[],int *pos_x,int *pos_y){
   for(int  i=0;i<15;i++){
@@ -151,17 +162,17 @@ void ClearMatriz(){
 void movimiento(int *pos_x,int *pos_y)
 {
   PORTC &= ~(0B1110000);
-  int limitx=7;
-  int limity=0;
+  int limit_max=7;
+  int limit_min=0;
   // se mueve hacia arriba
   if (!(PINC & (1 << PC0)))
   {
     while (!(PINC & (1 << PC0))){}
    
     PORTC |= 0B0010000;
-    if (pos_y < &limitx)
+    if (pos_y > 0)
     {
-      *pos_y += 1;
+      *pos_y -= 1;
     }
   }
 
@@ -171,9 +182,9 @@ void movimiento(int *pos_x,int *pos_y)
     while (!(PINC & (1 << PC1))){}
 
     PORTC |= 0B0110000;
-    if (pos_y > 0)
+    if (pos_y < &limit_max)
     {
-      *pos_y -= 1;
+      *pos_y += 1;
     }
   }
 
@@ -181,11 +192,11 @@ void movimiento(int *pos_x,int *pos_y)
   else if (!(PINC & (1 << PC2)))
   {
     while (!(PINC & (1 << PC2))){}
-
+    MostrarWin();
     PORTC |= 0B1010000;
-    if (pos_x < &limitx)
+    if (pos_x < &limit_max)
     {
-      *pos_x+= 1;
+      *pos_x += 1;
     }
   }
 
@@ -193,11 +204,11 @@ void movimiento(int *pos_x,int *pos_y)
   else if (!(PINC & (1 << PC3)))
   {
     while (!(PINC & (1 << PC3))){}
-
+    MostrarGameOver();
     PORTC |= 0B1110000;
-    if (pos_x >0)
+    if (pos_x > 0)
     {
-      *pos_x-= 1;
+      *pos_x -= 1;
  }
 }
 }
@@ -231,12 +242,12 @@ int main()
   while (1)
   {
     movimiento(&persona.pos_x, &persona.pos_y);
-    PORTB = ~PORT[persona.pos_y];
-    PORTD = COLUMNA[persona.pos_x];
-      pierde(bomba,&persona.pos_x, &persona.pos_y);
+    PORTB = PORT[persona.pos_x];  //COLUMNAS!!
+    PORTD = ~COLUMNA[persona.pos_y];  //FILAS!!
+    pierde(bomba,&persona.pos_x, &persona.pos_y);
     Gana(&persona.pos_x, &persona.pos_y);
-  _delay_ms(1);
-}
+    _delay_ms(1);
+  }
 
 return 0;
 }
